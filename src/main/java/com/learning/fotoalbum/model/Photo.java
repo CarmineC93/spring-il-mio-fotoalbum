@@ -20,8 +20,8 @@ public class Photo {
     @NotEmpty(message = "The title can not be empty :(")
     private String title;
 
-    @NotEmpty(message = "Text can not be empty :(")
-    @Size(min = 10 ,max = 250, message = "The text must be smaller than 250 characters :(" )
+    @NotEmpty(message = "Text can not be empty :( ")
+    @Size(min = 5 ,max = 250, message = "The text must be greater than 5 and smaller than 250 characters :(" )
     @Lob
     private String description;
 
