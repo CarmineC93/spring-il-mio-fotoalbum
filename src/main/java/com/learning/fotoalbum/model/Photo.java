@@ -13,13 +13,6 @@ import java.util.List;
 public class Photo {
 
     //ATTRIBUTES / COLUMNS
-
-    /*titolo
-descrizione
-url
-visibile
-categorie*/
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
