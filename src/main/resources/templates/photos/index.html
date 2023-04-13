@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+
+  <div th:replace="~{fragments/link :: link}"></div>
+
+  <title>Photos</title>
+</head>
+
+<body>
+<header th:replace="~{fragments/navbar :: navbar('photos', ${keyword}, true)}"></header>
+
+<!--<h1>Photos <a th:href="@{/photos/create}" class="btn btn-success " title="add photo" sec:authorize="hasAuthority('ADMIN')">
+  Add New photo
+</a>
+</h1>-->
+
+<div th:replace="~{fragments/message :: message}" ></div>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th>Actions</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${!list.isEmpty()}" th:each="photo : ${list}" th:object="${photo}">
+    <td th:text="*{id}"></td>
+    <td th:text="*{title}"></td>
+    <td th:text="*{description}"></td>
+    <td > <img th:src="*{url}"> </td>
+    <td>
+<!--
+      <a th:href="@{|/photos/*{id}|}">Detail</a>
+      <a th:href="@{|/photos/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Modify</a>
+      <a th:href="@{|/photos/delete/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Delete</a>
+-->
+
+    </td>
+
+  </tr>
+  <tr th:if="${list.isEmpty()}">
+    <td colspan="4">Sorry, there aren't photos available</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
