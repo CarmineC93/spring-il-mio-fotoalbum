@@ -38,8 +38,21 @@ public class PhotoService {
         photoToPersist.setDescription(formPhoto.getDescription());
         photoToPersist.setUrl(formPhoto.getUrl());
         photoToPersist.setCategories(formPhoto.getCategories());
+        photoToPersist.setVisible(formPhoto.isVisible());
         return photoRepository.save(photoToPersist);
     }
+
+    public Photo updatePhoto(Photo formPhoto, Integer id) throws PhotoNotFoundException {
+        Photo photoToUpdate = getById(id);
+        photoToUpdate.setTitle(formPhoto.getTitle());
+        photoToUpdate.setDescription(formPhoto.getDescription());
+        photoToUpdate.setUrl(formPhoto.getUrl());
+        photoToUpdate.setCategories(formPhoto.getCategories());
+        photoToUpdate.setVisible(formPhoto.isVisible());
+        return photoRepository.save(photoToUpdate);
+    }
+
+
 
 
 

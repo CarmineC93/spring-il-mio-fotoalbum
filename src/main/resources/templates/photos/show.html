@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<header th:replace="~{fragments/navbar :: navbar('pizzas', '', false)}"></header>
+<header th:replace="~{fragments/navbar :: navbar('photos', '', false)}"></header>
 
 <div th:replace="~{fragments/message :: message}" ></div>
 
@@ -28,12 +28,16 @@
 
       <dt>Image: </dt>
       <dd>
-        <img th:src="|*{url}|">
+        <img th:src="*{url}">
       </dd>
+
+      <dt>Visible:</dt>
+      <dd th:if="*{visible}">Yes</dd>
+      <dd th:unless="*{visible}">No</dd>
+
 
       <dt>Category: </dt>
       <dd><span th:each="category : *{categories}" th:text="${category.name}" class="me-1"></span></dd>
-
 
     </dl>
   </div>

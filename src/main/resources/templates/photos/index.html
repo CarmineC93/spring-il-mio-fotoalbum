@@ -46,10 +46,9 @@
           <a th:href="@{|/photos/*{id}|}">
             <i class="fa-solid fa-eye"></i>
           </a>
-          <!--
-                <a th:href="@{|/photos/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')">
-          -->
 
+          <a th:href="@{|/photos/edit/*{id}|}" >
+            <!-- sec:authorize="hasAuthority('ADMIN')" -->
           <i class="fa-solid fa-pencil"></i>
           </a>
 

@@ -4,72 +4,92 @@
     <th:block th:replace="~{/fragments/link :: link}"></th:block>
     <title>New Photo</title>
 </head>
-<body>
-<th:block th:replace="~{/fragments/navbar :: navbar('pizzas', '', false)}"></th:block>
-<div class="container">
-    <h1>New Photo</h1>
+
+    <body th:with="edit=${photo.id != null}">
+
+        <header>
+            <th:block th:replace="~{/fragments/navbar :: navbar('photos', '', false)}"></th:block>
+        </header>
+
+        <main class="container">
 
 
-    <form id="photo-form" method="post" th:object="${photo}" th:action="@{/photos/create}"
-          class="row gy-3">
-        <!-- Errors -->
-        <ul>
-            <li th:each="err : ${#fields.globalErrors() }" th:text="${err}"></li>
-        </ul>
+            <h1 th:text="${edit ? 'Edit photo' : 'Create new photo'}"></h1>
 
-        <!-- title -->
-        <div class="col-12">
-            <label class="form-label" for="title">title</label>
-            <input type="text" id="title" class="form-control" th:field="*{title}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+
+            <form id="photo-form"
+                  method="post"
+                  th:object="${photo}"
+                  th:with="formAction=${edit ? '/photos/edit/' + photo.id : '/photos/create'}"
+                  th:action="@{${formAction}}"
+                  class="row gy-3">
+
+                <!-- Errors -->
                 <ul>
-                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                    <li th:each="err : ${#fields.globalErrors() }" th:text="${err}"></li>
                 </ul>
-            </div>
-        </div>
 
-        <!-- Description -->
-        <div class="col-12">
-            <label class="form-label" for="description">Description</label>
-            <input type="text" id="description" class="form-control" th:field="*{description}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-                </ul>
-            </div>
-        </div>
+                <!-- Title -->
+                <div class="col-12">
+                    <label class="form-label" for="title">title</label>
+                    <input type="text" id="title" class="form-control" th:field="*{title}"
+                           th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
 
-        <!--URL image-->
-        <div class="col-12">
-            <label class="form-label" for="url">Url image</label>
-            <input type="text" id="url" class="form-control" th:field="*{url}"
-                   th:errorClass="is-invalid">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
-                </ul>
-            </div>
-        </div>
+                <!-- Description -->
+                <div class="col-12">
+                    <label class="form-label" for="description">Description</label>
+                    <input type="text" id="description" class="form-control" th:field="*{description}"
+                           th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
 
-        <!-- Categories -->
-        <div class="col-12">
-            <h4>Categories</h4>
-            <div class="form-check" th:each="category : ${categoryList}">
-                <input class="form-check-input" type="checkbox" th:value="${category.id}"
-                       th:id="|category_${category.id}|" th:field="*{categories}">
-                <label class="form-check-label" th:for="|ingredient_${category.id}|" th:text="${category.name}"></label>
-            </div>
-        </div>
+                <!--URL image-->
+                <div class="col-12">
+                    <label class="form-label" for="url">Url image</label>
+                    <input type="text" id="url" class="form-control" th:field="*{url}"
+                           th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/photos}">Cancel</a>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
+                <!--Visible-->
+                <div class="col-12">
+                    <label class="form-check-label" for="visibility">Visible </label>
+                    <input class="form-check-input" type="checkbox"  th:checked="*{visible}"
+                               id="visibility" th:field="*{visible}">
 
-    </form>
-</div>
+                </div>
 
-</body>
+
+                <!-- Categories -->
+                <div class="col-12">
+                    <h4>Categories</h4>
+                    <div class="form-check" th:each="category : ${categoryList}">
+                        <input class="form-check-input" type="checkbox" th:value="${category.id}"
+                               th:id="|category_${category.id}|" th:field="*{categories}">
+                        <label class="form-check-label" th:for="|category_${category.id}|" th:text="${category.name}"></label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <a class="btn btn-primary" th:href="@{/photos}">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+        </main>
+    </body>
 </html>

@@ -25,7 +25,7 @@ public class Photo {
     @Lob
     private String description;
 
-    @NotNull(message = "Need to upload a photo :(")
+    @NotEmpty(message = "Need to upload a photo :(")
     @Column(nullable = false)
     private String url;
 

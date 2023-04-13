@@ -28,6 +28,7 @@ public class PhotoController {
      @Autowired
     private CategoryService categoryService;
 
+     //INDEX
     @GetMapping
     public String index(Model model, @RequestParam(name = "keyword") Optional<String> keyword) {
         List<Photo> photos;
@@ -41,6 +42,7 @@ public class PhotoController {
         return "photos/index";
     }
 
+    //SHOW
     @GetMapping("/{photoId}")
     public String show(@PathVariable("photoId") Integer id, Model model) {
         try {
@@ -52,6 +54,7 @@ public class PhotoController {
         }
     }
 
+    //CREATE
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("photo", new Photo());
@@ -59,7 +62,6 @@ public class PhotoController {
         model.addAttribute("categoryList", categoryService.getAll());
         return "/photos/create";
     }
-
 
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("photo") Photo formPhoto, BindingResult br, RedirectAttributes redirectAttributes, Model model){
@@ -72,6 +74,42 @@ public class PhotoController {
         photoService.createPhoto(formPhoto);
         return "redirect:/photos";
     }
+
+    //EDIT
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        try {
+            Photo photo = photoService.getById(id);
+            model.addAttribute("photo", photo);
+            model.addAttribute("categoryList", categoryService.getAll());
+
+            return "/photos/create"; //edit and create use the same template
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Photo with id '" + id + "' not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bs, RedirectAttributes redirectAttributes, Model model){
+        if(bs.hasErrors()){
+            System.out.println(bs);
+            model.addAttribute("categoryList", categoryService.getAll());
+            return "/photos/create"; //edit and create use the same template
+        }
+        try{
+            Photo updatedPhoto = photoService.updatePhoto(formPhoto, id);
+            redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.SUCCESS, "Photo " + id + " successfully updated"));
+
+            model.addAttribute("modifiedBy", categoryService.getAll());
+
+
+            return "redirect:/photos/" + Integer.toString(updatedPhoto.getId());
+        }catch(PhotoNotFoundException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Photo with id " + id + " not found");
+        }
+    }
+
 
 
 }
