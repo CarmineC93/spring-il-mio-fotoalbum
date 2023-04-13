@@ -1,5 +1,6 @@
 package com.learning.fotoalbum.service;
 
+import com.learning.fotoalbum.exceptions.PhotoNotFoundException;
 import com.learning.fotoalbum.model.Photo;
 import com.learning.fotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,15 @@ public class PhotoService {
 
     public List<Photo> getFilteredPhotos(String keyword) {
         return photoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
+    public Photo getById(Integer id) throws PhotoNotFoundException {
+        Optional<Photo> result = photoRepository.findById(id);
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new PhotoNotFoundException(Integer.toString(id));
+        }
     }
 
 

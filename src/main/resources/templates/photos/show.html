@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="~{fragments/link :: link}"></div>
+
+  <title>Photo Detail</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navbar :: navbar('pizzas', '', false)}"></header>
+
+<div th:replace="~{fragments/message :: message}" ></div>
+
+
+<div class="container" th:object="${photo}">
+  <h1 th:text="*{title}">Photos</h1>
+  <hr/>
+  <div>
+    <dl>
+      <dt>Title:</dt>
+      <dd th:text="*{title}"></dd>
+
+      <th:block th:unless="${#strings.isEmpty(photo.description)}">
+        <dt>Description:</dt>
+        <dd th:text="*{description}"></dd>
+      </th:block>
+
+      <dt>Image: </dt>
+      <dd>
+        <img th:src="|*{url}|">
+      </dd>
+
+      <dt>Category: </dt>
+      <dd><span th:each="category : *{categories}" th:text="${category.name}" class="me-1"></span></dd>
+
+
+    </dl>
+  </div>
+
+
+  <div>
+    <a th:href="@{/photos}"> Back to photos menu </a>
+  </div>
+
+
+</div>
+
+</body>
+</html>

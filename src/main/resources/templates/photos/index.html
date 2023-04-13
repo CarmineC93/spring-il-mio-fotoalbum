@@ -36,9 +36,11 @@
     <td th:text="*{description}"></td>
     <td style="max-height: 50px;"> <img th:src="*{url}" > </td>
     <td>
-<!--
-      <a th:href="@{|/photos/*{id}|}">Detail</a>
-      <a th:href="@{|/photos/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Modify</a>
+
+      <a th:href="@{|/photos/*{id}|}">
+        <i class="fa-solid fa-eye"></i>
+      </a>
+  <!--    <a th:href="@{|/photos/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Modify</a>
       <a th:href="@{|/photos/delete/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Delete</a>
 -->
 
