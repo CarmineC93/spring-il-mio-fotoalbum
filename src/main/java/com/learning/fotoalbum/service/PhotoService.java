@@ -15,14 +15,17 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepository;
 
+    //INDEX
     public List<Photo> getAllPhotos() {
-        return photoRepository.findAll(Sort.by("title"));
+        return photoRepository.findAll(Sort.by("id"));
     }
 
+    //RESEARCH
     public List<Photo> getFilteredPhotos(String keyword) {
         return photoRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
+    //SHOW
     public Photo getById(Integer id) throws PhotoNotFoundException {
         Optional<Photo> result = photoRepository.findById(id);
         if (result.isPresent()) {
@@ -32,6 +35,7 @@ public class PhotoService {
         }
     }
 
+    //CREATE
     public Photo createPhoto(Photo formPhoto) {
         Photo photoToPersist = new Photo();
         photoToPersist.setTitle(formPhoto.getTitle());
@@ -42,6 +46,7 @@ public class PhotoService {
         return photoRepository.save(photoToPersist);
     }
 
+    //EDIT
     public Photo updatePhoto(Photo formPhoto, Integer id) throws PhotoNotFoundException {
         Photo photoToUpdate = getById(id);
         photoToUpdate.setTitle(formPhoto.getTitle());
@@ -50,6 +55,17 @@ public class PhotoService {
         photoToUpdate.setCategories(formPhoto.getCategories());
         photoToUpdate.setVisible(formPhoto.isVisible());
         return photoRepository.save(photoToUpdate);
+    }
+
+    //DELETE
+    public boolean deleteById(Integer id) throws PhotoNotFoundException {
+        photoRepository.findById(id).orElseThrow(() -> new PhotoNotFoundException(Integer.toString(id)));
+        try {
+            photoRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

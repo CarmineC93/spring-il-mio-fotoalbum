@@ -52,8 +52,11 @@
           <i class="fa-solid fa-pencil"></i>
           </a>
 
-          <!--     <a th:href="@{|/photos/delete/*{id}|}" sec:authorize="hasAuthority('ADMIN')">Delete</a>
-         -->
+          <a th:href="@{|/photos/delete/*{id}|}">
+            <!--  sec:authorize="hasAuthority('ADMIN')"   -->
+            <i class="fa-solid fa-trash"></i>
+          </a>
+
 
         </td>
 

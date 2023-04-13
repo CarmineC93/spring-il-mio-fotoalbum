@@ -96,20 +96,31 @@ public class PhotoController {
             System.out.println(bs);
             model.addAttribute("categoryList", categoryService.getAll());
             return "/photos/create"; //edit and create use the same template
-        }
-        try{
+        }try{
             Photo updatedPhoto = photoService.updatePhoto(formPhoto, id);
             redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.SUCCESS, "Photo " + id + " successfully updated"));
-
             model.addAttribute("modifiedBy", categoryService.getAll());
-
-
             return "redirect:/photos/" + Integer.toString(updatedPhoto.getId());
         }catch(PhotoNotFoundException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Photo with id " + id + " not found");
         }
     }
 
-
-
+    //DELETE
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+        try{
+            boolean success = photoService.deleteById(id);
+            if (success){
+                redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.SUCCESS, "Photo '" + id + "' successfully deleted"));
+            }else{
+                redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.ERROR, "Photo '" + id + "' can NOT be deleted"));
+            }
+        }catch(PhotoNotFoundException e){
+               /* throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                anzichè lanciare eccezione mandiamo un messaggio più userfriendly*/
+            redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.ERROR, "Photo " + id + " can NOT be deleted, because doesn't exist"));
+        }
+        return "redirect:/photos";
+    }
 }

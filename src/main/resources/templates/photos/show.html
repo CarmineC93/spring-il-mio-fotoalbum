@@ -11,44 +11,39 @@
 <header th:replace="~{fragments/navbar :: navbar('photos', '', false)}"></header>
 
 <div th:replace="~{fragments/message :: message}" ></div>
+  <div class="container" th:object="${photo}">
+    <h1 th:text="*{title}">Photos</h1>
+    <hr/>
+    <div>
+      <dl>
+        <dt>Title:</dt>
+        <dd th:text="*{title}"></dd>
 
+        <th:block th:unless="${#strings.isEmpty(photo.description)}">
+          <dt>Description:</dt>
+          <dd th:text="*{description}"></dd>
+        </th:block>
 
-<div class="container" th:object="${photo}">
-  <h1 th:text="*{title}">Photos</h1>
-  <hr/>
-  <div>
-    <dl>
-      <dt>Title:</dt>
-      <dd th:text="*{title}"></dd>
+        <dt>Image: </dt>
+        <dd>
+          <img th:src="*{url}">
+        </dd>
 
-      <th:block th:unless="${#strings.isEmpty(photo.description)}">
-        <dt>Description:</dt>
-        <dd th:text="*{description}"></dd>
-      </th:block>
+        <dt>Visible:</dt>
+        <dd th:if="*{visible}">Yes</dd>
+        <dd th:unless="*{visible}">No</dd>
 
-      <dt>Image: </dt>
-      <dd>
-        <img th:src="*{url}">
-      </dd>
+        <dt>Category: </dt>
+        <dd><span th:each="category : *{categories}" th:text="${category.name}" class="me-1"></span></dd>
 
-      <dt>Visible:</dt>
-      <dd th:if="*{visible}">Yes</dd>
-      <dd th:unless="*{visible}">No</dd>
+      </dl>
+    </div>
 
+    <div>
+      <a th:href="@{/photos}"> Back to photos menu </a>
+    </div>
 
-      <dt>Category: </dt>
-      <dd><span th:each="category : *{categories}" th:text="${category.name}" class="me-1"></span></dd>
-
-    </dl>
   </div>
-
-
-  <div>
-    <a th:href="@{/photos}"> Back to photos menu </a>
-  </div>
-
-
-</div>
 
 </body>
 </html>
