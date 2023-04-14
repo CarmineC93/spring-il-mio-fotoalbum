@@ -35,13 +35,12 @@ public class Photo {
     //RELATIONS
     @ManyToMany
     @JoinTable(
-            name = "photo_category",
+            name = "photos_categories",
             joinColumns = @JoinColumn(name = "photo_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
     //GETTER & SETTER
-
 
     public Integer getId() {
         return id;
