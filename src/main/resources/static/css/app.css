@@ -7,5 +7,19 @@
 
 img{
     max-width: 200px;
-    box-shadow: 5px 10px #888888;
+    box-shadow: 5px 5px #000000;
+}
+
+th{
+    text-align: center;
+    }
+
+td a {
+    margin-right:5px;
+}
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 20px;
 }

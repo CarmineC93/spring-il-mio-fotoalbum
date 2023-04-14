@@ -5,7 +5,7 @@
     <title>New Photo</title>
 </head>
 
-    <body th:with="edit=${photo.id != null}">
+    <body th:with="edit=${photo.id != null}" class="bg-dark text-light" >
 
         <header>
             <th:block th:replace="~{/fragments/navbar :: navbar('photos', '', false)}"></th:block>
@@ -31,7 +31,7 @@
 
                 <!-- Title -->
                 <div class="col-12">
-                    <label class="form-label" for="title">title</label>
+                    <label class="form-label" for="title">Title</label>
                     <input type="text" id="title" class="form-control" th:field="*{title}"
                            th:errorClass="is-invalid">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
