@@ -3,11 +3,14 @@ package com.learning.fotoalbum.controller;
 import com.learning.fotoalbum.exceptions.PhotoNotFoundException;
 import com.learning.fotoalbum.model.CrudMessage;
 import com.learning.fotoalbum.model.Photo;
+import com.learning.fotoalbum.model.User;
+import com.learning.fotoalbum.repository.UserRepository;
 import com.learning.fotoalbum.service.CategoryService;
 import com.learning.fotoalbum.service.PhotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,9 +31,16 @@ public class PhotoController {
      @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UserRepository userRepository;
+
      //INDEX
     @GetMapping
-    public String index(Model model, @RequestParam(name = "keyword") Optional<String> keyword) {
+    public String index(Model model, @RequestParam(name = "keyword") Optional<String> keyword, Authentication authentication) {
+
+        User loggedUser = userRepository.findByEmail(authentication.getName()).orElseThrow();
+        model.addAttribute("loggedUser", loggedUser);
+
         List<Photo> photos;
         if (keyword.isEmpty()) {
             photos = photoService.getAllPhotos();

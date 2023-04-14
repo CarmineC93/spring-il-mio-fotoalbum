@@ -14,11 +14,11 @@
 
 <main>
   <div class="container">
+    <h3 th:text="|Hi ${loggedUser.firstName}|"></h3>
 
     <h1>Photos</h1>
 
-    <a th:href="@{/photos/create}" class="btn btn-success " title="add photo" >
-      <!-- sec:authorize="hasAuthority('ADMIN')" -->
+    <a th:href="@{/photos/create}" class="btn btn-success " title="add photo" sec:authorize="hasAuthority('ADMIN')">
       <i class="fa-solid fa-plus"></i>
     </a>
 
@@ -47,29 +47,25 @@
             <i class="fa-solid fa-eye"></i>
           </a>
 
-          <a th:href="@{|/photos/edit/*{id}|}" >
-            <!-- sec:authorize="hasAuthority('ADMIN')" -->
+          <a th:href="@{|/photos/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')">
           <i class="fa-solid fa-pencil"></i>
           </a>
 
-          <a th:href="@{|/photos/delete/*{id}|}">
-            <!--  sec:authorize="hasAuthority('ADMIN')"   -->
+          <a th:href="@{|/photos/delete/*{id}|}" sec:authorize="hasAuthority('ADMIN')">
             <i class="fa-solid fa-trash"></i>
           </a>
-
 
         </td>
 
       </tr>
       <tr th:if="${list.isEmpty()}">
-        <td colspan="4">Sorry, there aren't photos available</td>
+        <td colspan="4"> Sorry, there aren't photos available</td>
       </tr>
       </tbody>
     </table>
 
   </div>
 </main>
-
 
 </body>
 </html>

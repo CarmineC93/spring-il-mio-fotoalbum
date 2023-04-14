@@ -20,8 +20,7 @@
 
          <li class="nav-item">
             <a class="nav-link" th:href="@{/categories}"
-               th:classAppend="${current == 'categories'} ? active : not-active">Categories</a>
-           <!-- sec:authorize="hasAuthority('ADMIN')"-->
+               th:classAppend="${current == 'categories'} ? active : not-active" sec:authorize="hasAuthority('ADMIN')">Categories</a>
 
           </li>
 
@@ -39,12 +38,12 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
 
-<!--        <div class="ms-3">
+        <div class="ms-3">
           <span sec:authentication="name"></span>
-          <span sec:authentication=""></span>
+          <span sec:authentication="authorities"></span>
 
           <a class="btn btn-danger" th:href="@{/logout}">Logout</a>
-        </div>-->
+        </div>
 
       </div>
     </div>
