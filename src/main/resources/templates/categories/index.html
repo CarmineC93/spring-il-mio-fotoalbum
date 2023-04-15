@@ -9,24 +9,26 @@
       <th:block th:replace="~{/fragments/navbar :: navbar('photos', '', false)}"></th:block>
     </header>
 
-    <main class="container">
+    <main class="container my-4">
 
-      <h1>Categories</h1>
+      <h1>Photos' categories</h1>
       <!-- leggo la variabile message (flashAttribute) -->
       <th:block th:if="${message}">
         <div th:replace="~{/fragments/message :: message}"></div>
       </th:block>
 
-      <div class="row" th:with="action=${category.id == null ? '/categories/create' : '/categories/edit/' + category.id }">
+      <div class="row justify-content-between" th:with="action=${category.id == null ? '/categories/create' : '/categories/edit/' + category.id }">
 
-        <div class="col-6">
+        <div class="col-3">
           <ul class="list-group">
-            <li class="list-group-item" th:each="category : ${allCategories}">
+            <li class="list-group-item my-2 rounded text-center bg-secondary text-light" th:each="category : ${allCategories}">
               <h5 th:text="${category.name}"></h5>
               <p th:text="${category.description}"></p>
 
-              <a th:href="@{|/categories/edit/${category.id}|}">Modify</a>
-              <a th:href="@{|/categories/delete/${category.id}|}">Delete</a>
+              <div class="d-flex justify-content-around">
+                <a th:href="@{|/categories/edit/${category.id}|}" class="text-warning"><i class="fa-solid fa-pencil" ></i></a>
+                <a th:href="@{|/categories/delete/${category.id}|}" class="text-danger"><i class="fa-solid fa-trash"></i></a>
+              </div>
 
             </li>
           </ul>
@@ -70,8 +72,8 @@
             </div>
             <div class="col-12">
 
-              <a th:href="@{/categories}" class="btn btn-warning">Cancel</a>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <a th:href="@{/categories}" class="btn btn-warning my-2">Cancel</a>
+              <button type="submit" class="btn btn-primary my-2">Save</button>
             </div>
           </form>
         </div>
