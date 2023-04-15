@@ -30,4 +30,12 @@ public class MailboxMessageService {
         mailboxMessageRepository.delete(messageToDelete);
     }
 
+    //SEND MESSAGE FROM FRONT-END FORM
+    public void send(MailboxMessage formMailboxMessage){
+        MailboxMessage messageToSave = new MailboxMessage();
+        messageToSave.setContent(formMailboxMessage.getContent());
+        messageToSave.setEmail(formMailboxMessage.getEmail());
+        mailboxMessageRepository.save(messageToSave);
+    }
+
 }
