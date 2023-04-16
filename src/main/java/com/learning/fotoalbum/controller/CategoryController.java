@@ -76,7 +76,7 @@ public class CategoryController {
         if(categoryService.deleteById(id)){
             redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.SUCCESS, "Category successfully deleted"));
         }else{
-            redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.ERROR, "Cannot delete this category because is currently used in a photo"));
+            redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.ERROR, "Cannot delete this category because is currently assigned to a photo"));
         }
         return "redirect:/categories";
     }

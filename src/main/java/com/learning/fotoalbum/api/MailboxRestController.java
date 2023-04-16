@@ -16,6 +16,7 @@ public class MailboxRestController {
     @Autowired
     private MailboxMessageService mailboxMessageService;
 
+    //CREATE
     @PostMapping
     public void create(@Valid @RequestBody MailboxMessage formMailboxMessage, BindingResult bs){
         if(bs.hasErrors()) {

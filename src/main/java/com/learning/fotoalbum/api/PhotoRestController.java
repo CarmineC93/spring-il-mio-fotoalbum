@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/pizzas")
+@RequestMapping("/api/photos")
 public class PhotoRestController {
     @Autowired
     private PhotoService photoService;
