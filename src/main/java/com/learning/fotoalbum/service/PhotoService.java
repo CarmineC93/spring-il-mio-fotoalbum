@@ -20,9 +20,18 @@ public class PhotoService {
         return photoRepository.findAll(Sort.by("id"));
     }
 
+    public List<Photo> getAllVisiblePhotos() {
+        return photoRepository.findByVisibleTrue();
+    }
+
     //RESEARCH
+        // for back-end
     public List<Photo> getFilteredPhotos(String keyword) {
         return photoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+        // for front-end
+    public List<Photo> getAllFilteredVisiblePhotos(String keyword){
+            return photoRepository.findByTitleContainingIgnoreCaseAndVisibleTrue(keyword);
     }
 
     //SHOW

@@ -19,11 +19,8 @@ public class PhotoRestController {
     @GetMapping
     public List<Photo> index(@RequestParam(name = "keyword") Optional<String> search) {
         if (search.isPresent()) {
-            return photoService.getFilteredPhotos(search.get());
+            return photoService.getAllFilteredVisiblePhotos(search.get());
         }
-        return photoService.getAllPhotos();
+        return photoService.getAllVisiblePhotos();
     }
-
-
-
 }
