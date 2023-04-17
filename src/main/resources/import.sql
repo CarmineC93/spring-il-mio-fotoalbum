@@ -1,6 +1,6 @@
 
-INSERT INTO photos (title, description, visible, url) VALUES('Prima', 'pellicano', 1, 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg');
-INSERT INTO photos (title, description, visible, url) VALUES('Seconda', 'prova con validazione', 1, 'https://rivistanatura.com/wp-content/uploads/2021/06/rana-cioccolato-770x470.jpg');
+INSERT INTO photos (title, description, visible, url) VALUES('Fenicottero', 'Fenicottero rosa africano incontrato a Roma', 1, 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg');
+INSERT INTO photos (title, description, visible, url) VALUES('Raganella', 'Scattata durante un picnic', 1, 'https://rivistanatura.com/wp-content/uploads/2021/06/rana-cioccolato-770x470.jpg');
 
 
 INSERT INTO categories (name, description) VALUES('Naturalistic', 'About natural subjects');
