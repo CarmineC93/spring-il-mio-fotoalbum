@@ -81,19 +81,18 @@
           </button>
         
         <section id="form" class="my-4 d-none">
-          <form id="message-form" action="#" class="row gy-2">
+          <form id="message-form" action="#" class="row gy-2 flex-column">
         
             <!-- input'attribute name must be the same of the attributes in entity's model / column  -->
 
             <div class="col-6">
               <label class="form-label" for="email">Mail: </label>
-              <input class="form-control" type="email" id="email" name="email" />
+              <input class="form-control" type="email" id="email" name="email" placeholder="Your e-mail" />
             </div>
 
             <div class="col-6">
-              <label class="form-label" for="content">Content: </label>
-              <input
-                class="form-control" type="text" id="content" name="content"/>
+              <label class="form-label" for="content">Message: </label>
+              <textarea class="form-control" name="content" id="content" cols="20" rows="3" placeholder="Your message"></textarea>
             </div>
             
             <div class="col-12">
