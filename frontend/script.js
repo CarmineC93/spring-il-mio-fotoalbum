@@ -125,3 +125,19 @@ searchForm.addEventListener('submit', loadData);
 
 loadData();
 
+//TOGGLE header BUTTON ANIMATION
+const menuBtn  = document.querySelector('.menu-btn');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+          if(!menuOpen){
+              menuBtn.classList.add('open');
+              menuOpen = true;
+
+
+          } else {
+            menuBtn.classList.remove('open');
+            menuOpen = false;
+          }
+        });
+
+
