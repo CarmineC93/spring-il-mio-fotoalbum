@@ -30,8 +30,8 @@
     <table>
       <thead class="gx-3">
       <tr>
-        <th>N°</th>
-        <th>Title</th>
+        <--<th>N°</th>
+        <th>Title</th> -->
         <th>Image</th>
         <th>Actions</th>
 
@@ -39,8 +39,8 @@
       </thead>
       <tbody class="gx-3">
       <tr th:if="${!list.isEmpty()}" th:each="photo : ${list}" th:object="${photo}">
-        <td th:text="*{id}"></td>
-        <td th:text="*{title}"></td>
+        <-- <td th:text="*{id}"></td>
+        <td th:text="*{title}"></td> -->
         <td style="max-height: 50px;"> <img th:src="*{url}" > </td>
         <td>
 
